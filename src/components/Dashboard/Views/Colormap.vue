@@ -19,9 +19,6 @@
                </colormap>
 
                <showdata v-if="Datadispaly" v-on:father="showdatasay" :date="clickdate">
-                  <div slot="header">
-                     <h4>Show Data</h4>
-                  </div>
                </showdata> 
 
                <Calendar v-if="calendar_display" v-on:father="calendarsay" :yb="yb" :yd="yd" :sz="sz" >
@@ -66,11 +63,16 @@
                Calendar.methods.changefill(d3v4);
             this.calendar_display = true;
          },
-         calendarsay: function (date){
-            this.clickdate = date;
-            if (this.Datadispaly)
-               showdata.methods.initial(d3v4,this.clickdate);
-            this.Datadispaly = true;
+         calendarsay: function (date,display){
+            if(display){
+               this.clickdate = date;
+               if (this.Datadispaly)
+                  showdata.methods.initial(d3v4,this.clickdate);
+               this.Datadispaly = display;
+            }
+            else{
+               this.Datadispaly = display;
+            }
          },  
          showdatasay: function (date){
          }, 

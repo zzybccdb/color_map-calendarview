@@ -1,13 +1,5 @@
 <template>
-   <div class="card">
-      <div class="card-header text-center" v-if="$slots.header">
-         <slot name="header"></slot>
-         <hr>
-      </div>
-      <div class="card-body">
-         <div id="showdata"></div>
-      </div>
-   </div>
+   <div class="card" id="showdata"></div>
 </template>
 <script>
   import Card from './Card.vue'
@@ -33,16 +25,15 @@
 
          d3.selectAll("#showdata > *").remove();
 
-         const [width,height,cellSize] = [960,20,20];
-
          let dt = new Date(cl_date);
          let dt1 = new Date(dt.setDate(dt.getDate() - 7));
 
          let labels = this.Get_Label();
-
          let dt_arr = this.Get_Data(dt1,labels);
-
          let sort_dt = this.Sort_data(labels,dt_arr,cl_date,me);
+
+         let width = sort_dt[labels[0]].length*20 +200;
+         const [height,cellSize] = [20,20];
 
          let svg = d3.select("#showdata").selectAll("svg")
             .data(Object.keys(sort_dt))
@@ -51,9 +42,8 @@
             .attr("height",height)
             .append("g");
          
-         
          svg.append("text")
-            .attr("transform", "translate(18," + 15 + ")")
+            .attr("transform", "translate(0," + 15 + ")")
             .text(function(d){return d;});
 
          let rect = svg.selectAll(".item")
@@ -124,13 +114,14 @@
             arr.push([label,sum]);
          }
          arr.sort((a,b)=>{ return b[1] - a[1];});
+         let height = 0 ;
          for(let i = 0 ; i < 20 ; i++ ){  
-            if( arr[i][1] === 0 ){
+            if( arr[i][1] === "0.000" ){
                break;
             }
+            height += 20;
             Obj_Map[arr[i][0]] = obj[arr[i][0]];
          }
-
          return Obj_Map;
       },
    }
@@ -143,5 +134,15 @@
 }
 text{
    font-size: 100%;
+}
+#showdata{
+   position: fixed;
+   z-index :1;
+   background-color:white;
+   top:30%;
+   /* width:480px; */
+   /* height:440px; */
+   padding:20px;
+   /* pointer-events: none; */
 }
 </style>

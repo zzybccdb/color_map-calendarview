@@ -54,11 +54,11 @@ const routes = [
       //   name: 'Maps',
       //   component: Maps
       // },
-      // {
-      //   path: 'notifications',
-      //   name: 'Notifications',
-      //   component: Notifications
-      // },
+      {
+        path: 'notifications',
+        name: 'Notifications',
+        component: Notifications
+      },
       // {
       //   path: 'diagram',
       //   name: 'Diagram',
