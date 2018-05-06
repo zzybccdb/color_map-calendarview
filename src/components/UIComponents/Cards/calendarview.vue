@@ -108,12 +108,13 @@
                      window.scatter_plot.children[i].alpha = 0;
                   }
                }
-               me.parse2dad(me,l1);
+               me.parse2dad(me,l1,true);
             })
             .on("dblclick",function(d){
                for ( let i = 0; i < window.scatter_plot.children.length; i++){
                   window.scatter_plot.children[i].alpha = 1;
                }
+               me.parse2dad(me,"nodisplay",false);
             });
          },
          changefill(d3){
@@ -132,8 +133,8 @@
                };
             });
          },
-         parse2dad(me,date){
-            me.$emit('father',date);
+         parse2dad(me,date,display){
+            me.$emit('father',date,display);
          },
       },
    };
@@ -152,5 +153,8 @@
 
 #calendar{
    text-align:center ;
+}
+.Card{
+   z-index: 9999;
 }
 </style>
