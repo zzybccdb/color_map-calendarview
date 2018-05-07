@@ -139,6 +139,7 @@ text{
    position: fixed;
    z-index :1;
    background-color:white;
+   right:None;
    top:30%;
    /* width:480px; */
    /* height:440px; */

@@ -21,6 +21,7 @@
    import calendarviewVue from './calendarview.vue';
    export default {
       name: 'colormap',
+      props: ['display'],
       components: {
          Card
       },
@@ -122,12 +123,14 @@
          },
          zoom(){
             let transform = d3v4.event.transform;
-            for( let d in window.store )
-            {
-               let p = window.store[d];
-               let pos = transform.apply(p['pos']);
-               p.position.x = pos[0];
-               p.position.y = pos[1];
+            if(!this.display){
+               for( let d in window.store )
+               {
+                  let p = window.store[d];
+                  let pos = transform.apply(p['pos']);
+                  p.position.x = pos[0];
+                  p.position.y = pos[1];
+               }
             }
          },
          remap(){

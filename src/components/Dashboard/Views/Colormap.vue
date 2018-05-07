@@ -4,7 +4,7 @@
          <div class="row">
             <div class="col-12">
 
-               <colormap>
+               <colormap :display="display">
                   <div slot="header">
                      <h4>Colormap</h4>
                   </div> 
@@ -50,7 +50,8 @@
             yd: 2017,
             sz: window.size,
             Datadispaly: false,
-            clickdate : 0
+            clickdate : 0,
+            display:false,
          }
       },
       methods:{
@@ -62,6 +63,7 @@
             if (this.calendar_display)
                Calendar.methods.changefill(d3v4);
             this.calendar_display = true;
+            this.display = true;
          },
          calendarsay: function (date,display){
             if(display){
